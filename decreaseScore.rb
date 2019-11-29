@@ -2,20 +2,20 @@ start = Time.now
 finished = false
 while finished == false do
 
-#action here
-puts "do something"
+#will be player choosing option
+puts "Enter 'correct', 'ok' or 'wrong'"
 answer = gets.chomp
-#this is here for testing purposes
 
 finished = true
 end
 
 
 time = Time.now - start
-Integer score = 0
+#score will be taken from data in the main code
+Integer score = 100
 
 
-#/this is here to test
+#evaluates input from earlier
 if answer == "correct"
 	score =+ 10
 puts "correct. +10 points"
@@ -32,15 +32,15 @@ end
 end
 end
 
+# here for confirmation
 puts "You answered in #{time} seconds"
-#/this is here to test
-
 
 pointsLost = (10/(1+2.718**((0.6*time)-5)))-10
 pointsLost = pointsLost.round
 
 finalScore = score + pointsLost
 
+# here for confirmation
 puts "You gained #{score} points and lost #{pointsLost} points"
 puts "Your score FOR THIS QUESTION is #{finalScore}"
 
