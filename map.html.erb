@@ -15,14 +15,20 @@ h1 {
 }
 
 h2 {
-  font-family: Poppins;
+  font-family: Century Gothic;
   font-size: 18px;
-  font-weight: 600;
-  letter-spacing: 0.3px;
-  text-align: left;
-  color: #ffa500;
-  padding: 10px 0px 10px 10px;
+  color: #252525;
+  position: absolute;
+  right: 120px;
+  margin-bottom:0px;
 }
+
+h3 {
+      font-family: "Century Gothic";
+      font-size: 50px;
+      color: #d1dbdd;
+      text-align: center;
+    }
 
 .recipe {
   box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.5);
@@ -67,15 +73,16 @@ align-image,
 .align-image{
   display: inline-block;
   position: absolute;
-  right: 0px;
-  width: 40%;
+  right: 10px;
+  margin-top: 0px;
+  width: 44.5%;
   height: auto;
 }
 
 button1{
 background-color: #5514B4;
 color: #d1dbdd;
-padding: 80px 200px;
+padding: 80px 197px;
 font-family:Century Gothic;
 border: 8px solid #d1dbdd;
 margin: 10px;
@@ -86,7 +93,7 @@ bottom: 43%;
 button2{
   background-color: #5514B4;
   color: #d1dbdd;
-  padding: 80px 200px;
+  padding: 80px 190px;
   font-family:Century Gothic;
   border: 8px solid #d1dbdd;
   margin: 10px;
@@ -97,30 +104,131 @@ button2{
 button3{
   background-color: #5514B4;
   color: #d1dbdd;
-  padding: 80px 200px;
+  padding: 80px 192px;
   font-family:Century Gothic;
   border: 8px solid #d1dbdd;
   margin: 10px;
   position: absolute;
   bottom: 1%;
 }
-</head>
 
+.question {
+  width: 780px;
+  height: 85px;  
+  padding: 50px;
+  border: 8px solid #d1dbdd;
+  margin-left: 10px;
+  bottom: 62%
+}
+
+#clockdiv{
+	font-family: Century-Gothic;
+	color: #d1dbdd;
+	font-weight: 100;
+	text-align: center;
+  font-size: 30px;
+  display: inline-block;
+  margin-left: 88px;
+  margin-top: 223px;
+}
+
+#clockdiv > div{
+	padding: 33px;
+	border: 8px solid #d1dbdd;
+  background: #5514B4;
+  display: inline-block;
+}
+
+#clockdiv div > span{
+	padding: 38px;
+	border: 2px solid #d1dbdd;
+  background: #252525;
+  display: inline-block;
+}
+
+.smalltext{
+	padding-top: 25px;
+	font-size: 25px;
+}
 </style>
+</head>
+<body onload="countdown()">  
+<center>
+  <h2 id="countdown">
+</center>
 <body>
-        <h1> DISASTER RECOVERY</h1>
+  
+  <h1> DISASTER RECOVERY</h1>
       <main>
         <div class="align-profile">
-
-          <button1>Answer 1</button1>
-          <button2>Answer 2</button2>
-          <button3>Answer 3</button3>
+          <div class="question">A tornado has taken out the exchanges in Isle of Man. Connect Belfast with Birmingham.</div> 
+          <button1>Blue Route  </button1>
+          <button2>Yellow Route</button2>
+          <button3>Green Route </button3>
         </div>
-        <div class="align-image">
-        <img src="http://www.projectmapping.co.uk/Reviews/Resources/UK%20map.jpeg"/>
-        </div>
+        
+    <div id="clockdiv">
+      <div>
+        <span class="minutes"></span>
+        <div class="smalltext">MINUTES</div>
+      </div>
+      <div>
+        <span class="seconds"></span>
+        <div class="smalltext">SECONDS</div>
+      </div>
+    </div>
+     <div class="align-image">
+          <img src="/29.png"/>
+      </div>
       </main>
     </div>
+<script>
+  var ss = 90;
+function countdown() {
+ss = ss-1;
+if (ss<0) {
+window.location="http://localhost:3000/game/over";
+}
+else {
+document.getElementById("countdown").innerHTML=ss;
+window.setTimeout("countdown()", 1000);
+}
+}
 
+  function getTimeRemaining(endtime) {
+  var t = Date.parse(endtime) - Date.parse(new Date());
+  var seconds = Math.floor((t / 1000) % 60);
+  var minutes = Math.floor((t / 1000 / 60) % 60);
+  
+  return {
+    'total': t,
+    'minutes': minutes,
+    'seconds': seconds
+  };
+}
+
+function initializeClock(id, endtime) {
+  var clock = document.getElementById(id);
+  var minutesSpan = clock.querySelector('.minutes');
+  var secondsSpan = clock.querySelector('.seconds');
+
+  function updateClock() {
+    var t = getTimeRemaining(endtime);
+    minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
+    secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
+    
+    if (t.total <= 0) {
+      clearInterval(timeinterval);
+    }
+  }
+
+  updateClock();
+  var timeinterval = setInterval(updateClock, 1000);
+}
+
+var deadline = new Date(Date.parse(new Date()) + 15 * 24 * 60 * 4.2);
+initializeClock('clockdiv', deadline);
+         
+</script>
   </body>
 </html>
